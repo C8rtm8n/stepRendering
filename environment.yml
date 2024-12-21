@@ -1,0 +1,7 @@
+name: steprendering_env
+channels:
+  - conda-forge
+dependencies:
+  - python=3.9
+  - pythonocc-core
+  - streamlit
