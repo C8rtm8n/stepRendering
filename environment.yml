@@ -5,4 +5,4 @@ dependencies:
   - python=3.9
   - streamlit
   - pythonocc-core
-  - other-dependencies-you-need
+  - other-required-packages
