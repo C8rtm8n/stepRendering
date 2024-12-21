@@ -17,5 +17,5 @@ SHELL ["conda", "run", "-n", "steprendering_env", "/bin/bash", "-c"]
 # Exponování portu pro Streamlit
 EXPOSE 8501
 
-# Spuštění aplikace
-CMD ["streamlit", "run", "stepRender.py", "--server.port=8501", "--server.address=0.0.0.0"]
+CMD ["conda", "run", "--no-capture-output", "-n", "steprendering_env", "streamlit", "run", "stepRender.py", "--server.port=8501", "--server.address=0.0.0.0"]
+
