@@ -1,19 +1,20 @@
-# Použití základního Python image
-FROM python:3.9-slim
+# Použití základního image s podporou conda
+FROM continuumio/miniconda3:latest
 
 # Nastavení pracovního adresáře
 WORKDIR /app
 
-# Kopírování požadavků
-COPY requirements.txt /app/requirements.txt
-
-# Instalace závislostí
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Kopírování kódu aplikace
+# Kopírování požadavků a kódu aplikace
+COPY environment.yml /app/environment.yml
 COPY . /app
 
-# Exponování portu Streamlit
+# Instalace závislostí pomocí conda
+RUN conda env create -f environment.yml && conda clean -afy
+
+# Aktivace conda prostředí
+SHELL ["conda", "run", "-n", "steprendering_env", "/bin/bash", "-c"]
+
+# Exponování portu pro Streamlit
 EXPOSE 8501
 
 # Spuštění aplikace
