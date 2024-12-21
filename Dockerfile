@@ -8,8 +8,8 @@ WORKDIR /app
 COPY environment.yml /app/environment.yml
 COPY . /app
 
-# Instalace závislostí pomocí conda
-RUN conda env create -f environment.yml && conda clean -afy
+# Instalace závislostí pomocí conda s retry mechanismem
+RUN conda env create -f environment.yml --quiet || conda env create -f environment.yml --quiet || conda env create -f environment.yml --quiet && conda clean -afy
 
 # Aktivace conda prostředí
 SHELL ["conda", "run", "-n", "steprendering_env", "/bin/bash", "-c"]
